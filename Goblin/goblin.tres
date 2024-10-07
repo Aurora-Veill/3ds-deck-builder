@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b7pb172qpxlcb"]
+
+[ext_resource type="Texture2D" uid="uid://uik80qjcibe2" path="res://Goblin/textures/Warlock_Diff_1.png" id="1_tqb3x"]
+
+[resource]
+albedo_texture = ExtResource("1_tqb3x")
