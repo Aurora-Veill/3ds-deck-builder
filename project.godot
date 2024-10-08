@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="3d fps deck builder"
-run/main_scene="res://Lvl2.tscn"
+run/main_scene="res://lvl_4.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 

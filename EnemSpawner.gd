@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var enemyList = [preload("res://EnemyGround.tscn"), preload("res://EnemyFly.tscn")]
+@export var enemyList = [preload("res://EnemyGround.tscn"), preload("res://EnemyFly.tscn"), preload("res://melee_enemy.tscn")]
 @export var bossList = [preload("res://Boss.tscn")]
 @export var spawn : Node
 @export var currency = 3
@@ -37,7 +37,7 @@ func spawn_enem():
 		return
 	else: 
 		spawnedAt.append(spawns[(ranP % spawns.size())].position)
-	var enem = enemyList[ran].instantiate()
+	var enem = enemyList[2].instantiate()
 	enem.position = spawns[(ranP % spawns.size())].position
 	enem.target = $"../PC"
 	enem.onDeath.connect(on_enem_death)

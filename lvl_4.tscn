@@ -59,50 +59,54 @@ navigation_mesh = SubResource("NavigationMesh_rtij0")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 7.5, 20)
+use_collision = true
 flip_faces = true
 size = Vector3(50, 15, 50)
 
 [node name="CSGCombiner3D2" type="CSGCombiner3D" parent="NavigationRegion3D"]
+use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 2.5, 5)
-size = Vector3(20, 5, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 1, 5)
+size = Vector3(20, 2, 1)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.5, 14.5)
-size = Vector3(1, 5, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 14.5)
+size = Vector3(1, 2, 20)
 
 [node name="CSGCombiner3D3" type="CSGCombiner3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 40, 0, 40)
+use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 2.5, 5)
-size = Vector3(20, 5, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 1, 5)
+size = Vector3(20, 2, 1)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.5, 14.5)
-size = Vector3(1, 5, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 14.5)
+size = Vector3(1, 2, 20)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2.5, 20)
+use_collision = true
 size = Vector3(2, 5, 2)
 
 [node name="Spawns" type="Node" parent="."]
 
 [node name="Node3D" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2876, 1, 28.6653)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.288, 1.5, 28.665)
 
 [node name="Node3D5" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5377, 1, 14.3709)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.538, 1.5, 14.371)
 
 [node name="Node3D2" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4827, 1, 27.0591)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.483, 1.5, 27.059)
 
 [node name="Node3D3" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5402, 1, 13.9272)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.54, 1.5, 13.927)
 
 [node name="Node3D4" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.343, 1, 39.6923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.343, 1.5, 39.692)
 
 [node name="Node3D6" type="Node3D" parent="Spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.568, 1, 2.27749)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.568, 1.5, 2.277)

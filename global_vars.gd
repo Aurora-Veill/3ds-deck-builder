@@ -8,7 +8,7 @@ var first = true
 var isPaused = false
 var roomsEntered = 1
 var level = 0
-var rooms = [["res://Lvl1.tscn","res://lvl3.tscn","res://Lvl2.tscn"], [], []]
+var rooms = [["res://lvl3.tscn","res://Lvl2.tscn", "res://lvl_4.tscn"], [], []]
 var bossRoom = [[], [], []]
 var levelThresholds = [10, 20, 30]
 func addScore(points):
