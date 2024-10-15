@@ -7,6 +7,7 @@ var speed = 5.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var canAttack = true
 var isSlow = false
+var dmg = 1
 @onready var nav = $navigator
 @onready var atkCD = $AtkCooldown
 signal onDeath(x, y, z)
@@ -22,6 +23,9 @@ func _physics_process(delta):
 	move_and_slide()
 	if !target:
 		return
+	look_at(target.global_position)
+	rotation.x = 0
+	rotation.z = 0
 	if position.distance_to(target.global_position) < 2:
 		if canAttack:
 			atkCD.start()
@@ -49,3 +53,8 @@ func _on_hp_on_death():
 
 func _on_atk_cooldown_timeout():
 	canAttack = true # Replace with function body.
+
+
+func _on_hitbox_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+	if body.has_method("player"):
+		body.get_node("HP").take_dmg(dmg)
