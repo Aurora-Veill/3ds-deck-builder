@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
-func _on_area_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_area_3d_body_shape_entered(_body_rid: RID, body: Node3D, _body_shape_index: int, _local_shape_index: int) -> void:
 	if body != maker and body not in ivl:
 		if body.has_node("HP"):
 			body.get_node("HP").take_dmg(damage)
