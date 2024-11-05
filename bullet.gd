@@ -1,7 +1,7 @@
 extends Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") / 100
-@export var speed = 0.5
+@export var speed = 0.3
 @export var pierce = 1
 @export var ignoreWall = false
 @export var slow = false

@@ -1,6 +1,6 @@
 extends Enemy
 
-var speed = 5.0
+var speed = 3.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var target := Node3D

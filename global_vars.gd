@@ -11,11 +11,19 @@ var level = 0
 var rooms = [["res://lvl3.tscn","res://Lvl2.tscn", "res://lvl_4.tscn"], [], []]
 var bossRoom = [[], [], []]
 var levelThresholds = [10, 20, 30]
+var PHP = 0
+var MHP = 0
 func addScore(points):
 	score += points
 
 func saveDeck(Deck, Discard):
 	deck = Deck + Discard
+
+func saveHP(HP):
+	PHP = HP.hp 
+	
+func saveMaxHP(HP):
+	MHP = HP.maxHP
 
 func getNextRoom():
 	roomsEntered += 1

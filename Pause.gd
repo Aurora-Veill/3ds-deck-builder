@@ -27,5 +27,7 @@ func start_next_lvl():
 	PC.deck.append(PC.leftHand) 
 	PC.deck.append(PC.rightHand)
 	get_node("/root/GlobalVars").saveDeck(PC.deck, PC.disc)
+	get_node("/root/GlobalVars").saveHP(PC.getHPNode())
+	get_node("/root/GlobalVars").saveMaxHP(PC.getHPNode())
 	get_node("/root/GlobalVars").first = false
 	get_tree().change_scene_to_file(nextLvl)

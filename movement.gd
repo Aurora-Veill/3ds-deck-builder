@@ -1,7 +1,8 @@
 extends CharacterBody3D
 class_name player
 
-var speed = 5.0
+@export var BobCurve: Curve
+var speed = 7.0
 var jump_height = 9
 signal take_dmg
 signal reloading
@@ -21,10 +22,15 @@ var canShoot = true
 var canSpec = true
 var tilShufAtk = 0
 var tilShufSpec = 0
+var Cycle100 = 0.0
+var Jumping = false
+
 func _ready():
 	if !global.first:
 		deck = global.deck
 		deck.shuffle()
+		$HP.hp = global.PHP
+		$HP.maxHP = global.MHP
 	else:
 		var bolt = preload("res://default_proj_card.tscn")
 		deck.append(bolt.instantiate())
@@ -51,8 +57,12 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 	else:
 		hasDashed = false
+		Jumping = false
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_height
+		Jumping = true
+	if Input.is_action_just_released("jump"):
+		velocity.y = min(velocity.y, 0)
 	var input_dir = Input.get_vector("left", "right", "forward", "backwards")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
@@ -62,6 +72,12 @@ func _physics_process(delta):
 			velocity.x = direction.x * speed
 		if abs(velocity.z) < speed:
 			velocity.z = direction.z * speed
+		if is_on_floor():
+			Cycle100 += delta * 100
+			if Cycle100 > 100:
+				Cycle100 = 0.0
+			$fpv.position.y = (BobCurve.sample(Cycle100 / 100)) * .5
+			$rotater.position.y = (BobCurve.sample(Cycle100 / 100)) * .5
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
@@ -130,9 +146,10 @@ func _input(event):
 func attack(Projectile: PackedScene) -> void:
 	$ShootNoise.play()
 	var atk = Projectile.instantiate()
-	atk.position = position
+	atk.position = $fpv.position
 	atk.set_dir(-cameraf.get_global_transform().basis.z, true)
 	atk.maker = self
+	atk.speed = 1
 	get_parent().add_child(atk)
 
 func addCard(Card, Pickup):
@@ -159,6 +176,9 @@ func take_slow(time):
 
 func _on_slow_timer_timeout():
 	speed *= 2
+
+func shootPos():
+	return $fpv.global_position
 
 func player():
 	pass

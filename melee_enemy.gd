@@ -1,6 +1,6 @@
 extends Enemy
 
-var speed = 5.0
+var speed = 6.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var target := Node3D
@@ -13,7 +13,7 @@ var dmg = 1
 signal onDeath(x, y, z)
 
 func _ready():
-	$AnimationPlayer.play("mixamo_com")
+	$AnimationPlayer.play("idle")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -32,11 +32,18 @@ func _physics_process(delta):
 			$AnimationPlayer.play("meow/attack")
 			canAttack = false
 	else:
-		nav.set_target_position(target.global_position)
-		direction = (nav.get_next_path_position() - global_position).normalized()
-		velocity = velocity.lerp(direction * speed, delta)
-		if isSlow:
-			velocity = velocity.lerp(direction * speed * 0.5, delta)
+		if !$AnimationPlayer.is_playing() or $AnimationPlayer.current_animation == "idle":
+			$AnimationPlayer.play("meow/walk")
+		else:
+			
+			if !$AnimationPlayer.current_animation == "meow/attack":
+				nav.set_target_position(target.global_position)
+				direction = (nav.get_next_path_position() - global_position).normalized()
+				velocity = velocity.lerp(direction * speed, delta)
+				if isSlow:
+					velocity = velocity.lerp(direction * speed * 0.5, delta)
+			else:
+				velocity = Vector3.ZERO
 	
 func attack(Projectile: PackedScene) -> void:
 	var atk = Projectile.instantiate()

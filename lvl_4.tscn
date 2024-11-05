@@ -49,7 +49,8 @@ PC = NodePath("../PC")
 [node name="EnemSpawner" type="Node3D" parent="." node_paths=PackedStringArray("spawn", "upgradeSpawner")]
 script = ExtResource("4_a5x4d")
 spawn = NodePath("../Spawns")
-currency = 4
+currency = 1
+minEnems = 0
 upgradeSpawner = NodePath("../UpgradeSpawner")
 
 [node name="UpgradeSpawner" type="Node3D" parent="."]

@@ -39,7 +39,7 @@ skeleton = NodePath("../slowTimer")
 maxHP = 1
 
 [node name="AtkCooldown" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 one_shot = true
 
 [node name="SpawnNoise" type="AudioStreamPlayer3D" parent="."]

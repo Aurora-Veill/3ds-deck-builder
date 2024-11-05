@@ -1,6 +1,6 @@
 extends Enemy
 
-var speed = 5.0
+var speed = 2.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var target := Node3D
@@ -11,7 +11,7 @@ var projectile = preload("res://projectile.tscn")
 var isSlow = false 
 @onready var atkCD = $AtkCooldown
 signal onDeath(x, y, z)
-
+@onready var HP = $HP
 func _ready():
 	$SpawnNoise.play()
 
@@ -30,7 +30,7 @@ func _physics_process(delta):
 	else:
 		targetPos = target.global_position
 	direction = (targetPos - global_position).normalized()
-	if global_position.y < 10:
+	if global_position.y < 7:
 		direction.y += 1
 	velocity = velocity.lerp(direction * speed, delta)
 	if isSlow:

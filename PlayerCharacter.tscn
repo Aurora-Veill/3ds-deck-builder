@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://cof1cf5gtmex"]
+[gd_scene load_steps=11 format=3 uid="uid://cof1cf5gtmex"]
 
 [ext_resource type="Script" path="res://movement.gd" id="1_fmirg"]
 [ext_resource type="PackedScene" uid="uid://dhhhc0afvu644" path="res://hp.tscn" id="2_cschx"]
 [ext_resource type="AudioStream" uid="uid://dmmm7tlwigm01" path="res://RPG_Essentials_Free/12_Player_Movement_SFX/08_Step_rock_02.wav" id="3_q6uel"]
 [ext_resource type="AudioStream" uid="uid://blqhiehmhyhf0" path="res://RPG_Essentials_Free/8_Atk_Magic_SFX/25_Wind_01.wav" id="4_p78it"]
 [ext_resource type="AudioStream" uid="uid://bcfr0xtjs4vqx" path="res://RPG_Essentials_Free/10_Battle_SFX/15_Impact_flesh_02.wav" id="5_y825q"]
+
+[sub_resource type="Curve" id="Curve_xjwan"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q2c65"]
 
@@ -18,6 +22,7 @@ size = Vector3(0.15, 0.1, 0.05)
 
 [node name="character" type="CharacterBody3D"]
 script = ExtResource("1_fmirg")
+BobCurve = SubResource("Curve_xjwan")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_q2c65")
@@ -29,26 +34,24 @@ mesh = SubResource("CapsuleMesh_tis65")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0, 0)
 current = true
 
-[node name="HP" parent="." instance=ExtResource("2_cschx")]
+[node name="SpreadAims" type="Node" parent="fpv"]
 
-[node name="SpreadAims" type="Node" parent="."]
-
-[node name="Aim1" type="Node3D" parent="SpreadAims"]
+[node name="Aim1" type="Node3D" parent="fpv/SpreadAims"]
 transform = Transform3D(0.999998, 0, 0.00174533, 0, 1, 0, -0.00174533, 0, 0.999998, 0, 0.01, 0.01)
 
-[node name="Aim2" type="Node3D" parent="SpreadAims"]
+[node name="Aim2" type="Node3D" parent="fpv/SpreadAims"]
 transform = Transform3D(0.999998, 0, -0.00174533, 0, 1, 0, 0.00174533, 0, 0.999998, 0, -0.01, -0.01)
 
-[node name="Aim3" type="Node3D" parent="SpreadAims"]
+[node name="Aim3" type="Node3D" parent="fpv/SpreadAims"]
 transform = Transform3D(0.999998, -0.00174533, 0, 0.00174533, 0.999998, 0, 0, 0, 1, 0, -0.01, 0.01)
 
-[node name="Aim4" type="Node3D" parent="SpreadAims"]
+[node name="Aim4" type="Node3D" parent="fpv/SpreadAims"]
 transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, 0.01, -0.01)
 
 [node name="rotater" type="Node3D" parent="."]
 
 [node name="objPointer" type="Node3D" parent="rotater"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08295, -1.59911)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -1.599)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="rotater/objPointer"]
 mesh = SubResource("BoxMesh_1l5e2")
@@ -56,6 +59,8 @@ mesh = SubResource("BoxMesh_1l5e2")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="rotater/objPointer"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.15)
 mesh = SubResource("PrismMesh_0jl51")
+
+[node name="HP" parent="." instance=ExtResource("2_cschx")]
 
 [node name="shootTimer" type="Timer" parent="."]
 wait_time = 0.5
