@@ -8,7 +8,7 @@ func _ready():
 
 func look():
 	if player:
-		look_at(player.global_position)
+		look_at_from_position(position, player.global_position)
 		rotation.y = 0
 
 func _process(_delta):
