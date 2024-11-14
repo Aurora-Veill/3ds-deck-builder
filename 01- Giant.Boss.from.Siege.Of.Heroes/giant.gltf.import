@@ -4,20 +4,20 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ned0bwrfd5tn"
-path="res://.godot/imported/0942213fd46b4dd3a148a24ae8bbb6d2.gltf-6848612c672aeba5c9f93534f6f643e8.scn"
+path="res://.godot/imported/giant.gltf-c94d621e1f5cae26ec6466f16c0a4e8b.scn"
 
 [deps]
 
-source_file="res://01- Giant.Boss.from.Siege.Of.Heroes/0942213fd46b4dd3a148a24ae8bbb6d2.gltf"
-dest_files=["res://.godot/imported/0942213fd46b4dd3a148a24ae8bbb6d2.gltf-6848612c672aeba5c9f93534f6f643e8.scn"]
+source_file="res://01- Giant.Boss.from.Siege.Of.Heroes/giant.gltf"
+dest_files=["res://.godot/imported/giant.gltf-c94d621e1f5cae26ec6466f16c0a4e8b.scn"]
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="Node3D"
+nodes/root_name="Giant Boss"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
-nodes/import_as_skeleton_bones=false
+nodes/import_as_skeleton_bones=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true

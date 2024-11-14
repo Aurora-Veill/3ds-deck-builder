@@ -31,6 +31,18 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"meshes": {
+"0942213fd46b4dd3a148a24ae8bbb6d2_Textured_Gigant_boss__0": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://01- Giant.Boss.from.Siege.Of.Heroes/Giant.res"
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1
