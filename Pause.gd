@@ -18,7 +18,7 @@ func spawnEnd():
 	var portal = endPortal.instantiate()
 	portal.position = ePLoc
 	portal.entered.connect(start_next_lvl)
-	portal.player = PC
+	portal.Player = PC
 	portal.look()
 	add_child(portal)
 	

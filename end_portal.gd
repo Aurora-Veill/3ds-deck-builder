@@ -1,7 +1,7 @@
 extends Node3D
 
 signal entered()
-var Player
+var Player : player
 @export var spawnTo = "res://Lvl2.tscn"
 func _ready():
 	$SpawnNoise.play()
@@ -9,9 +9,10 @@ func _ready():
 func look():
 	if Player:
 		look_at_from_position(position, Player.global_position)
-		rotation.y = 0
+	
 
 func _process(_delta):
+	rotation.x = 0
 	if Player:
 		Player.objTarget = global_position
 		Player.objActive = true

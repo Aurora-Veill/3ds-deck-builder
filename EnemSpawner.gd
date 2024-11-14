@@ -37,13 +37,13 @@ func spawn_enem():
 		return
 	else: 
 		spawnedAt.append(spawns[(ranP % spawns.size())].position)
-	var enem = enemyList[2].instantiate()
+	var enem = bossList[0].instantiate()
 	enem.position = spawns[(ranP % spawns.size())].position
 	enem.target = $"../PC"
 	enem.onDeath.connect(on_enem_death)
 	add_child(enem)
 	curEnems += 1
-	currency -= enem.cost
+	currency -= 1
 	
 
 func _on_timer_timeout():
