@@ -157,7 +157,7 @@ func addCard(Card, Pickup):
 	Pickup.queue_free()
 
 func _on_hp_on_death():
-	get_tree().change_scene_to_file("res://Lvl1.tscn")
+	get_tree().change_scene_to_file("res://Lvl2.tscn")
 
 func _on_hp_take_dmg():
 	$DmgNoise.play()
