@@ -141,8 +141,8 @@ func _input(event):
 	if event is InputEventMouseMotion and !get_node("../UI").isPaused:
 		rotation.y -= (event.relative.x * global.sens) / 100
 		cameraf.rotation.x -= (event.relative.y * global.sens) / 250
-		$rotater.rotation.x -= (event.relative.y * global.sens) / 250
 		
+		$rotater.rotation.x -= (event.relative.y * global.sens) / 250
 func attack(Projectile: PackedScene) -> void:
 	$ShootNoise.play()
 	var atk = Projectile.instantiate()
