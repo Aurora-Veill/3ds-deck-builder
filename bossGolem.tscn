@@ -1,0 +1,89 @@
+[gd_scene load_steps=14 format=3 uid="uid://dq04qjfmr4hr6"]
+
+[ext_resource type="Script" path="res://bossGolem.gd" id="1_6cdu7"]
+[ext_resource type="PackedScene" uid="uid://dku5plpxv86af" path="res://mecha_golem.tscn" id="2_wxx3x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o488s"]
+size = Vector3(10, 20, 10)
+
+[sub_resource type="Animation" id="Animation_kxr7s"]
+resource_name = "new_animation"
+
+[sub_resource type="Animation" id="Animation_f0eks"]
+resource_name = "walk"
+
+[sub_resource type="Animation" id="Animation_box10"]
+resource_name = "slam"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mj3jj"]
+_data = {
+"idle": SubResource("Animation_kxr7s"),
+"slam": SubResource("Animation_box10"),
+"walk": SubResource("Animation_f0eks")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2od57"]
+animation = &"meow/attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g7iuy"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_tukw0"]
+fadein_time = 0.3
+fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbpgc"]
+animation = &"meow/walk"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_3ng51"]
+xfade_time = 0.3
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "walk"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ccq7p"]
+graph_offset = Vector2(-602.965, -93.7288)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_2od57")
+nodes/Animation/position = Vector2(-420, 240)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_g7iuy")
+nodes/Idle/position = Vector2(-480, -120)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_tukw0")
+nodes/OneShot/position = Vector2(100, -120)
+nodes/Walk/node = SubResource("AnimationNodeAnimation_xbpgc")
+nodes/Walk/position = Vector2(-520, 60)
+nodes/output/position = Vector2(300, 60)
+nodes/transition/node = SubResource("AnimationNodeTransition_3ng51")
+nodes/transition/position = Vector2(-100, -80)
+node_connections = [&"OneShot", 0, &"transition", &"OneShot", 1, &"Animation", &"output", 0, &"OneShot", &"transition", 0, &"Idle", &"transition", 1, &"Walk"]
+
+[node name="Boss" type="CharacterBody3D"]
+script = ExtResource("1_6cdu7")
+
+[node name="MechaGolem" parent="." instance=ExtResource("2_wxx3x")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_o488s")
+
+[node name="navigator" type="NavigationAgent3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_mj3jj")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("")
+tree_root = SubResource("AnimationNodeBlendTree_ccq7p")
+anim_player = NodePath("../AnimationPlayer")
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/transition/current_state = "walk"
+parameters/transition/transition_request = ""
+parameters/transition/current_index = 1

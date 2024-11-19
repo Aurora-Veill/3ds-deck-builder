@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://bagsfxj35tp7i"]
+
+[ext_resource type="Script" path="res://melee_enemy.gd" id="1_eyfvi"]
+[ext_resource type="PackedScene" uid="uid://dku5plpxv86af" path="res://mecha_golem.tscn" id="3_ux767"]
+[ext_resource type="PackedScene" uid="uid://dhhhc0afvu644" path="res://hp.tscn" id="5_frquu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_amfk3"]
+size = Vector3(0.75, 1.60938, 0.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_htw4k"]
+size = Vector3(1.5, 0.5, 1.5)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ql4x3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nj8y8"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hmsxj"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_tukw0"]
+fadein_time = 0.3
+fadeout_time = 0.2
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_3ng51"]
+xfade_time = 0.3
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "walk"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_u42ao"]
+graph_offset = Vector2(-710.631, -93.9412)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_hmsxj")
+nodes/Animation/position = Vector2(-320, -100)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_ql4x3")
+"nodes/Animation 2/position" = Vector2(-480, -40)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_nj8y8")
+"nodes/Animation 3/position" = Vector2(-420, 80)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_tukw0")
+nodes/OneShot/position = Vector2(100, -120)
+nodes/output/position = Vector2(300, 60)
+nodes/transition/node = SubResource("AnimationNodeTransition_3ng51")
+nodes/transition/position = Vector2(-100, -80)
+node_connections = [&"OneShot", 0, &"transition", &"OneShot", 1, &"Animation 3", &"output", 0, &"OneShot", &"transition", 0, &"Animation", &"transition", 1, &"Animation 2"]
+
+[node name="MeleeEnemy" type="CharacterBody3D"]
+script = ExtResource("1_eyfvi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195313, 0)
+shape = SubResource("BoxShape3D_amfk3")
+
+[node name="AtkCooldown" type="Timer" parent="."]
+wait_time = 2.2
+one_shot = true
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.362877, 0.492236, -0.515157)
+shape = SubResource("BoxShape3D_htw4k")
+disabled = true
+
+[node name="navigator" type="NavigationAgent3D" parent="."]
+
+[node name="HP" parent="." instance=ExtResource("5_frquu")]
+maxHP = 1
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_u42ao")
+anim_player = NodePath("../AnimationPlayer")
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/transition/current_state = "walk"
+parameters/transition/transition_request = ""
+parameters/transition/current_index = 1
+
+[node name="MechaGolem" parent="." instance=ExtResource("3_ux767")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="timeout" from="AtkCooldown" to="." method="_on_atk_cooldown_timeout"]
+[connection signal="body_shape_entered" from="Hitbox" to="." method="_on_hitbox_body_shape_entered"]
+[connection signal="onDeath" from="HP" to="." method="_on_hp_on_death"]
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
