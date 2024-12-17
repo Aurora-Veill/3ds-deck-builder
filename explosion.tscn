@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1uxsamf872qr"]
+[gd_scene load_steps=6 format=3 uid="uid://b1uxsamf872qr"]
 
 [ext_resource type="Script" path="res://explosion.gd" id="1_kglsg"]
 [ext_resource type="Texture2D" uid="uid://dqj6iapirjnh8" path="res://Free_pixel_tiles_pack/cobblestone_1.png" id="2_1qiju"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ushvs"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0g47g"]
+height = 0.5
 radius = 0.001
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0msb5"]
 albedo_texture = ExtResource("2_1qiju")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_22xic"]
+height = 0.5
+radius = 0.001
 
 [node name="Explosion" type="Node3D"]
 script = ExtResource("1_kglsg")
@@ -15,9 +20,16 @@ script = ExtResource("1_kglsg")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("SphereShape3D_ushvs")
+shape = SubResource("CylinderShape3D_0g47g")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="."]
+inner_radius = 0.001
+outer_radius = 0.25
 material = SubResource("StandardMaterial3D_0msb5")
+
+[node name="Area3D2" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("CylinderShape3D_22xic")
 
 [connection signal="body_shape_entered" from="Area3D" to="." method="_on_area_3d_body_shape_entered"]

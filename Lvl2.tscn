@@ -35,8 +35,9 @@ albedo_texture = ExtResource("6_3duuo")
 script = ExtResource("1_33v6y")
 PC = NodePath("PC")
 
-[node name="UI" parent="." node_paths=PackedStringArray("PC") instance=ExtResource("2_h1feq")]
+[node name="UI" parent="." node_paths=PackedStringArray("PC", "EnemySpawner") instance=ExtResource("2_h1feq")]
 PC = NodePath("../PC")
+EnemySpawner = NodePath("../EnemSpawner")
 
 [node name="PC" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("3_bu26v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.7348, 1.501, 0)

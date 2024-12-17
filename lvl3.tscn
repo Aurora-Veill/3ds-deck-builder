@@ -58,8 +58,9 @@ camera_attributes = SubResource("CameraAttributesPractical_f2xjb")
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 1, 0)
 UI = NodePath("../UI")
 
-[node name="UI" parent="." node_paths=PackedStringArray("PC") instance=ExtResource("2_tdvdl")]
+[node name="UI" parent="." node_paths=PackedStringArray("PC", "EnemySpawner") instance=ExtResource("2_tdvdl")]
 PC = NodePath("../PC")
+EnemySpawner = NodePath("../EnemSpawner")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_18ho0")

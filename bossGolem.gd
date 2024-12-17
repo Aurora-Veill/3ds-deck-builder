@@ -1,6 +1,6 @@
 extends Enemy
 
-var speed = 6.0
+var speed = 1.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 @export var target := Node3D
@@ -12,6 +12,7 @@ var dmg = 1
 @onready var atkCD = $AtkCooldown
 var animTree
 signal onDeath(x, y, z)
+var shockwave = preload("res://explosion.tscn")
 
 func _ready():
 	animTree = $AnimationTree
@@ -28,9 +29,10 @@ func _physics_process(delta):
 	look_at(target.global_position)
 	rotation.x = 0
 	rotation.z = 0
+	
 	if animTree["parameters/OneShot/active"]:
 		return
-	if position.distance_to(target.global_position) < 1.5:
+	if position.distance_to(target.global_position) < 10:
 		velocity = Vector3.ZERO
 		animTree["parameters/OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	else:
@@ -66,3 +68,11 @@ func _on_atk_cooldown_timeout():
 func _on_hitbox_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.has_method("player"):
 		body.get_node("HP").take_dmg(dmg)
+
+func walkShockwave():
+	var atk = shockwave.instantiate()
+	atk.position = position
+	atk.speed = 0.05
+	atk.MRadius = 50
+	atk.maker = self
+	get_parent().add_child(atk)

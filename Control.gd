@@ -2,11 +2,13 @@ extends Control
 
 @export var dmgCurve: Curve
 @export var PC: Node
+@export var EnemySpawner : Node
 @onready var PCHP = PC.getHPNode()
 @onready var blood = $"Fullscreen Effects/Blood"
 @onready var globals = get_node("/root/GlobalVars")
 @onready var HPBar = $"Fullscreen Effects/HPBar"
 @onready var Health = $"Fullscreen Effects/HPBar/Health"
+@onready var enemyCounter = $"Fullscreen Effects/EnemLeft"
 var isPaused = false
 var dmgVal = 0
 
@@ -22,6 +24,8 @@ func _process(_delta):
 		HPBar.size.x = float(PCHP.hp)/PCHP.maxHP * $"Fullscreen Effects/HPBar2".get_size().x
 		if Health:
 			Health.set_frame(PCHP.hp - 1)
+	if enemyCounter:
+		enemyCounter.set_text("Enemies Left: " + str(EnemySpawner.curEnems))
 
 func pauseMenu():
 	if isPaused:

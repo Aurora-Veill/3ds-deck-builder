@@ -95,6 +95,12 @@ text = "Press [E] to pick up [CARD]"
 label_settings = SubResource("LabelSettings_2pl3c")
 horizontal_alignment = 1
 
+[node name="EnemLeft" type="Label" parent="Fullscreen Effects"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Enemies Left: 0"
+
 [node name="Cards" type="BoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
